@@ -70,11 +70,15 @@ class Game extends React.Component {
     
     // 出现胜者或已被落棋则直接返回
     if (calculateWinner(squares) || squares[i]) return
-
+    
     squares[i] = this.state.xIsNext ? 'X' : 'O'
+    const x = i % 3 + 1
+    const y = Math.floor((i / 3 + 1))
     this.setState({
       history: history.concat([{
         squares,
+        x,
+        y,
       }]),
       xIsNext: !this.state.xIsNext,
       stepNumber: history.length,
@@ -95,8 +99,10 @@ class Game extends React.Component {
     const winner = calculateWinner(current.squares)
 
     const moves = history.map((step, move) => {
+      const x = this.state.history[move].x
+      const y = this.state.history[move].y
       const desc = move
-        ? `Go to move #${move}`
+        ? `Go to move #${move}, {${x}, ${y}}`
         : 'Go to game start'
 
       return (
