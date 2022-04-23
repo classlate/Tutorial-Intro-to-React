@@ -109,6 +109,7 @@ class Game extends React.Component {
         <li key={move}>
           <button
             onClick={() => this.jumpTo(move)}
+            className={move === this.state.stepNumber && 'current-replay-step'}
           >
             {desc}
           </button>
