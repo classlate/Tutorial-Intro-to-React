@@ -59,6 +59,7 @@ class Game extends React.Component {
       ],
       xIsNext: true,
       stepNumber: 0,
+      upSort: false,
     }
   }
   
@@ -108,13 +109,14 @@ class Game extends React.Component {
         <li key={move}>
           <button
             onClick={() => this.jumpTo(move)}
-            className={move === this.state.stepNumber && 'current-replay-step'}
+            className={move === this.state.stepNumber ? 'current-replay-step' : ''}
           >
             {desc}
           </button>
         </li>
       )
     })
+    const movesReverse = moves.slice().reverse()
     
     const status = winner
       ? `Winner: ${winner}`
@@ -129,8 +131,14 @@ class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-          <div>{status}</div>
-          <ol>{moves}</ol>
+          <div>
+            <span>{status}</span>
+            <button
+              style={{ marginLeft: '8px', padding: '0 8px', }}
+              onClick={() => {this.setState({ upSort: !this.state.upSort})}}
+            >↓</button>
+          </div>
+          <ol>{this.state.upSort ? movesReverse : moves}</ol>
         </div>
       </div>
     );
