@@ -147,9 +147,15 @@ class Game extends React.Component {
           <div>
             <span style={{ color: (winner || history.length ===10) ? '#f00' : '#000' }}>{status}</span>
             <button
-              style={{ marginLeft: '8px', padding: '0 8px', }}
+              style={{ margin: '0 8px', padding: '0 8px', }}
               onClick={() => {this.setState({ upSort: !this.state.upSort})}}
             >↓</button>
+            <button
+              onClick={() => {this.setState({
+                history: this.state.history.slice(0, 1),
+                stepNumber: 0,
+              })}}
+            >reset</button>
           </div>
           <ol>{this.state.upSort ? movesReverse : moves}</ol>
         </div>
