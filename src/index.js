@@ -77,7 +77,6 @@ class Game extends React.Component {
 
     // 出现胜者或已被落棋则直接返回
     if (winner || squares[i]) {
-      // console.log(111)
       winner && this.setState({ winLine: winner[1]})
       return
     }
@@ -93,12 +92,7 @@ class Game extends React.Component {
       }]),
       xIsNext: !this.state.xIsNext,
       stepNumber: history.length,
-      // winLine:  winner ? winner[1] : []
     })
-
-    // console.log(history)
-    // const res = calculateWinner(history[history.length - 1].squares)
-    // res && this.setState({ winLine: res[1] })
   }
 
   jumpTo(step) {
@@ -136,6 +130,8 @@ class Game extends React.Component {
     
     const status = winner
       ? `Winner: ${winner[0]}`
+      : history.length === 10
+      ? `No Winner`
       : `Next player: ${this.state.xIsNext ? 'X' : 'O'}`
     
     return (
@@ -143,13 +139,13 @@ class Game extends React.Component {
         <div className="game-board">
           <Board
             squares={current.squares}
-            winLine={this.state.winLine}
+            winLine={winner?.[1] ?? []}
             onClick={(i) => this.handleClick(i)}
           />
         </div>
         <div className="game-info">
           <div>
-            <span>{status}</span>
+            <span style={{ color: (winner || history.length ===10) ? '#f00' : '#000' }}>{status}</span>
             <button
               style={{ marginLeft: '8px', padding: '0 8px', }}
               onClick={() => {this.setState({ upSort: !this.state.upSort})}}
