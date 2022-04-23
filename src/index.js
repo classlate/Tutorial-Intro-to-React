@@ -150,7 +150,7 @@ class Game extends React.Component {
             <button
               style={{ margin: '0 8px', padding: '0 8px', }}
               onClick={() => {this.setState({ upSort: !this.state.upSort})}}
-            >↓</button>
+            >{this.state.upSort ? '↑' : '↓'}</button>
             <button
               onClick={() => {this.setState({
                 history: this.state.history.slice(0, 1),
