@@ -25,6 +25,7 @@ class Board extends React.Component {
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
         style={{ color: this.props.winLine.includes(i) ? '#f00' : '#000' }}
+        key={i}
       />
     )
   }
@@ -32,9 +33,9 @@ class Board extends React.Component {
   render() {
     let i = 0
     const grid = (row, col) => {
-      return Array(row).fill(null).map(() => {
+      return Array(row).fill(null).map((val, idx) => {
         return (
-          <div className="board-row">
+          <div className="board-row" key={idx}>
             {
               Array(col).fill(null).map(() => this.renderSquare(i++))
             }
